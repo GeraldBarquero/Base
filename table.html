@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+	<div class="container">
+	<br>
+		<div class="row">
+			<table class="table table-condensed table-bordered" id="tabla">
+				<thead>
+					<tr>
+						<th rowspan="2" class="bg-primary">Archivos</th>
+						<th colspan="7" class="text-center bg-primary">Equipos</th>
+					</tr>
+					<tr class="elementos">
+						
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(function(){
+			llenarTabla();
+
+		});
+
+		function llenarTabla(){
+			var dsArchivos = ["Archivo1", "Archivo2", "Archivo3", "Archivo4", "Archivo5", "Archivo6", "Archivo7"];
+			var dsEquipos = ["Equipo1", "Equipo2", "Equipo3"];
+			var dsCantUsuarios = [
+									{"archivo":0,"equipo":0,"cant":16},
+									{"archivo":0,"equipo":1,"cant":20},
+									{"archivo":0,"equipo":2,"cant":0},
+									{"archivo":1,"equipo":0,"cant":1},
+									{"archivo":1,"equipo":1,"cant":0},
+									{"archivo":1,"equipo":2,"cant":3},
+									{"archivo":2,"equipo":0,"cant":7},		
+									{"archivo":2,"equipo":1,"cant":8},
+									{"archivo":2,"equipo":2,"cant":9},
+									{"archivo":3,"equipo":0,"cant":45},
+									{"archivo":3,"equipo":1,"cant":0},
+									{"archivo":3,"equipo":2,"cant":0},
+									{"archivo":4,"equipo":0,"cant":16},
+									{"archivo":4,"equipo":1,"cant":20},
+									{"archivo":4,"equipo":2,"cant":0},
+									{"archivo":5,"equipo":0,"cant":0},
+									{"archivo":5,"equipo":1,"cant":20},
+									{"archivo":5,"equipo":2,"cant":0},
+									{"archivo":6,"equipo":0,"cant":16},
+									{"archivo":6,"equipo":1,"cant":0},
+									{"archivo":6,"equipo":2,"cant":0}
+								];
+
+			for (var i = 0; i < dsEquipos.length ; i++) {
+				var element = "<th>"+dsEquipos[i]+"</th>"
+				$("#tabla thead tr.elementos").append(element);
+			};
+
+			for (var i = 0; i < dsArchivos.length ; i++) {
+				var element = "<tr><td>"+dsArchivos[i]+"</td></tr>"
+				$("#tabla tbody").append(element);
+			};
+
+			var row = document.querySelectorAll("#tabla tbody tr");
+
+			for (var i = 0; i < row.length ; i++) {
+				
+				for (var f = 0; f < dsCantUsuarios.length; f++) {
+					if (dsCantUsuarios[f].archivo == i) {
+						var valor = dsCantUsuarios[f].cant;
+						$(row[i]).append("<td class='"+aplicarClaseColor(valor)+"'>"+valor+"</td>");
+					}else{
+						continue;
+					}
+				}
+			};
+		};
+
+		function aplicarClaseColor(valor){
+			var clase = "";
+			if (valor <= 0) {
+				clase = "bg-success";
+			}else if (valor <= 10) {
+				clase = "bg-info";
+			}else if (valor <= 25) {
+				clase = "bg-warning";
+			}else if (valor > 25){
+				clase = "bg-danger";
+			}
+			return clase; 
+		}
+		
+
+
+	</script>
+</body>
+</html>
